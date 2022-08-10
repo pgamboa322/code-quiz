@@ -1,3 +1,22 @@
 .questionList {
     list-style-type: none;
 }
+
+/* hide sections until they are shown via the click events */
+#questions,
+#end,
+#highscores,
+#correct {
+    display: none;  
+  } 
+
+/* Answer button styling */
+.choiceBtn,
+.choiceBtn:hover,
+.choiceBtn:active,
+.choiceBtn:focus,
+.choiceBtn:active:focus {
+    box-shadow: none;
+    outline: none;
+    background-color: #5dc0cd;
+}

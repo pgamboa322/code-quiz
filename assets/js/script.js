@@ -87,7 +87,7 @@ function startQuiz() {
     questions.style.display = "block";
     count = 0;
 
-    setTime();
+    timer();
     // takes total count of choices to prompt to next question
     setQuestion(count);
 }
@@ -159,7 +159,67 @@ function postScore(event) {
         topScores.append(li);
     }
 
+    // Adding user scores to local storage
+    addScores();
+    showScores();
+
 }
+
+function addScores() {
+    localStorage.setItem("scoreArr", JSON.stringify(scoreArr));
+}
+
+function showScores() {
+    // Retrieve scores in localStorage
+    // Parsing the JSON string of scores into object
+    let storedScores = JSON.parse(localStorage.getItem("scoreArr"));
+
+    // Retrieve array from localStorage, update the score array to it
+    if (storedScores !== null) {
+        scoreArr = storedScores;
+    }
+}
+
+// clear all scores from score array
+function clearScores() {
+    localStorage.clear();
+    topScores.innerHTML="";
+}
+
+// Start timer and display first question when click start quiz
+startBtn.addEventListener("click", startQuiz);
+
+// Check choices on choice btn selector
+choiceClass.forEach(item => {
+    item.addEventListener('click', checkChoice);
+});
+
+// Post Score via submit button on click
+submitBtn.addEventListener("click", postScore);
+
+// Go Back Button
+backBtn.addEventListener("click", function () {
+    highScore.style.display = "none";
+    instructions.style.display = "block";
+    timeRemaining = 75;
+    time.textContent = `Time:${timeRemaining}s`;
+});
+
+// Clear the scores
+clearAllScoresBtn.addEventListener("click", clearScores);
+
+// Conditional to view or hide high score btn
+viewScrBtn.addEventListener("click", function () {
+    if (highScore.style.display === "none") {
+        highScore.style.display = "block";
+    } else if (highScore.style.display === "block") {
+        highScore.style.display = "none";
+    } else {
+        return alert("There are no scores currently.");
+    }
+});
+
+
 
 
 
