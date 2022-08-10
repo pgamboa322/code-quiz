@@ -15,7 +15,7 @@
             <button id="high-scores" type="button" class="btn btn-info d-inline-block mt-3 ml-2">High Scores</button>
         </div>
         <div class="col-6">
-            <p class="d-flex justify-content-end time mr-2 mt-3">Time:75s</p>
+            <p class="d-flex justify-content-end mytime mr-2 mt-3">Time:75s</p>
         </div>
     </div>
 
@@ -37,13 +37,13 @@
                     <div class="col-6">
                         <h2 id="question">Questions Here</h2>
                         <ul class="px-0 py-0 questionList">
-                            <li class="mb-3"><button id="answer1" value="0" type="button"
+                            <li class="mb-3"><button id="choice1" value="0" type="button"
                                     class="btn btn-info choiceBtn">Answer 1</button></li>
-                            <li class="mb-3"><button id="answer2" value="1" type="button"
+                            <li class="mb-3"><button id="choice2" value="1" type="button"
                                     class="btn btn-info choiceBtn">Answer 2</button></li>
-                            <li class="mb-3"><button id="answer3" value="2" type="button"
+                            <li class="mb-3"><button id="choice3" value="2" type="button"
                                     class="btn btn-info choiceBtn">Answer 3</button></li>
-                            <li class="mb-3"><button id="answer4" value="3" type="button"
+                            <li class="mb-3"><button id="choice4" value="3" type="button"
                                     class="btn btn-info choiceBtn">Answer 4</button></li>
                         </ul>
                         <div id="correct" class="font-weight-light font-italic">
@@ -57,10 +57,24 @@
                     <div class="col-3"></div>
                     <div class="col-6">
                         <h2>Time's Up!</h2>
-                        <p>Your final score is: <span id="score" class="pl-1">0</span></p>
+                        <p>Your final score is: <span id="myScore" class="pl-1">0</span></p>
                         <p>Enter initials: <span class="ml-1"><input placeholder="Initials" id="initials" /></span>
                             <button id="enterScore" class="btn btn-info mx-1 my-1 d-inline-block">Submit</button>
                         </p>
+                    </div>
+                </div>
+            </section>
+            <section id="highscores">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                            <h2>High Scores</h2>
+                            <!-- High scores should be added as a sorted desc list -->
+                            <ol id="top-scores">
+                                <!-- <li></li> -->
+                            </ol>
+                            <button id="backBtn" class="btn btn-success d-inline-block mx-1 my-1">Go back</button>
+                            <button id="clearAllScores" class="btn btn-success mx-1 my-1 d-inline-block">Clear scores</button>
                     </div>
                 </div>
             </section>
