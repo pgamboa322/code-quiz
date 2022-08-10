@@ -134,5 +134,32 @@ function checkChoice(event) {
     setQuestion(count);
 }
 
+function postScore(event) {
+    event.preventDefault();
+
+    quizEnd.style.display = "none";
+    highScore.style.display = "block";
+
+    let upperInit = initials.value.toUpperCase();
+    scoreArr.push({ myInitials: upperInit, myScore: secondsLeft });
+
+    // sort scores by amount greatest to least
+    scoreArr = scoreArr.sort((a, b) => {
+        if (a.myScore < b.myScore) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+    
+    topScores.innerHTML="";
+    for (let i = 0; i < scoreArr.length; i++) {
+        let li = document.createElement("li");
+        li.textContent = `${scoreArr[i].myInitials}: ${scoreArr[i].myScore}`;
+        topScores.append(li);
+    }
+
+}
+
 
 
