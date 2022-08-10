@@ -30,7 +30,7 @@ const viewScrBtn = document.querySelector("#view-scores");
 
 // Creating the question array to populate our answer buttons
 
-const questionArr =[
+const questionArr = [
 
     {
         // question 0
@@ -64,4 +64,75 @@ const questionArr =[
     }
 
 ]
+
+// creating function to call the timer start
+
+function timer() {
+    let timeInterval = setInterval(function () {
+       timeRemaining--;
+        time.textContent = `Time: ${timeRemaining}s`;
+
+        if (timeRemaining === 0 || count === questionArr.length) {
+            clearInterval(timeInterval);
+            questions.style.display = "none";
+            quizEnd.style.display = "block";
+            score.textContent = timeRemaining;
+        }
+    }, 1000);
+}
+
+// start quiz with timer and set up questions
+function startQuiz() {
+    instructions.style.display = "none";
+    questions.style.display = "block";
+    count = 0;
+
+    setTime();
+    // takes total count of choices to prompt to next question
+    setQuestion(count);
+}
+
+// creating function to set question to choice btn
+function setQuestion(id) {
+    if (id < questionArr.length) {
+        questions.textContent = questionArr[id].question;
+        choice1Btn.textContent = questionArr[id].answers[0];
+        choice2Btn.textContent = questionArr[id].answers[1];
+        choice3Btn.textContent = questionArr[id].answers[2];
+        choice4Btn.textContent = questionArr[id].answers[3];
+    }
+}
+
+// creating function to check if user choice is correct 
+// prompting next question 
+function checkChoice(event) {
+    event.preventDefault();
+
+    // display message alerting if user choice is correct
+    correct.style.display = "block";
+    let p = document.createElement("p");
+    correct.appendChild(p);
+
+    // fallback after 1 second
+    setTimeout(function () {
+        p.style.display = 'none';
+    }, 1000);
+
+    // conditional checking if choice is correct
+    if (questionArr[count].correctAnswer === event.target.value) {
+        p.textContent = "Correct!";
+    } else if (questionArr[count].correctAnswer !== event.target.value) {
+        timeRemaining = timeRemaining - 10;
+        p.textContent = "Wrong!";
+    }
+
+    // increment so the question array index is increased
+    if (count < questionArr.length) {
+        count++;
+    }
+    // call setQuestion function to populate next question on click event
+    setQuestion(count);
+}
+
+
 
