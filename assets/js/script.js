@@ -2,11 +2,12 @@
 let time = document.querySelector("p.myTime");
 let timeRemaining = 75;
 let score = document.querySelector("#myScore");
-let instructions = document.querySelector("#instructions");
-let questions = document.querySelector("#questions");
+const instructions = document.querySelector("#instructions");
+const questions = document.querySelector("#questions");
+let questionEl = document.querySelector("#question");
 let count = 0;
-let correct = document.querySelector("#correct");
-let quizEnd = document.querySelector("#end");
+const correct = document.querySelector("#correct");
+const quizEnd = document.querySelector("#end");
 let initials = document.querySelector("#initials");
 
 const highScore = document.querySelector("#highscores");
@@ -22,11 +23,11 @@ const choice1Btn = document.querySelector("#choice1");
 const choice2Btn = document.querySelector("#choice2");
 const choice3Btn = document.querySelector("#choice3");
 const choice4Btn = document.querySelector("#choice4");
-const submitBtn = document.querySelector("#enter-score");
+const submitBtn = document.querySelector("#enterScore");
 // btns for score maintenance
 const backBtn = document.querySelector("#backBtn");
 const clearAllScoresBtn = document.querySelector("#clearAllScores");
-const viewScrBtn = document.querySelector("#view-scores");
+const viewScrBtn = document.querySelector("#viewScores");
 
 // Creating the question array to populate our answer buttons
 
@@ -36,31 +37,31 @@ const questionArr = [
         // question 0
         question: "Commonly used data types do NOT include:",
         answers: ["1. alerts", "2. booleans", "3. strings", "4. numbers"],
-        correctAnswer: "2"
+        correctAnswer: "1"
     },
     {
         // question 1
         question: "The condition in an if / else statement is enclosed within ____.",
         answers: ["1. parentheses", "2. square brackets", "3. quotes", "4. curly brackets"],
-        correctAnswer: "3"
+        correctAnswer: "1"
     },
     {
         // question 2
         question: "Arrays in Javascript can be used to store ____.",
         answers: ["1. booleans", "2. other arrays", "3. numbers and strings", "4. all of the above"],
-        correctAnswer: "1"
+        correctAnswer: "4"
     },
     {
         // question 3
         question: "String values must be enclosed within ____ when being assigned to variables.",
         answers: ["1. quotes", "2. curly brackets", "3. commmas", "4. parentheses"],
-        correctAnswer: "2"
+        correctAnswer: "1"
     },
     {
         // question 4
         question: "A very useful tool used during development and debugging for printing content to the debugger is:",
         answers: ["1. Javascript", "2. console.log", "3. for loops", "4. terminal/bash"],
-        correctAnswer: "3"
+        correctAnswer: "2"
     }
 
 ]
@@ -70,11 +71,12 @@ const questionArr = [
 function timer() {
     let timeInterval = setInterval(function () {
        timeRemaining--;
-        time.textContent = `Time: ${timeRemaining}s`;
+        time.textContent = `Time:${timeRemaining}s`;
 
         if (timeRemaining === 0 || count === questionArr.length) {
             clearInterval(timeInterval);
-            questions.style.display = "none";
+            questions.style.display = "none"; 
+            // questions.style.display = "none";
             quizEnd.style.display = "block";
             score.textContent = timeRemaining;
         }
@@ -95,7 +97,7 @@ function startQuiz() {
 // creating function to set question to choice btn
 function setQuestion(id) {
     if (id < questionArr.length) {
-        questions.textContent = questionArr[id].question;
+        questionEl.textContent = questionArr[id].question;
         choice1Btn.textContent = questionArr[id].answers[0];
         choice2Btn.textContent = questionArr[id].answers[1];
         choice3Btn.textContent = questionArr[id].answers[2];
@@ -141,7 +143,7 @@ function postScore(event) {
     highScore.style.display = "block";
 
     let upperInit = initials.value.toUpperCase();
-    scoreArr.push({ myInitials: upperInit, myScore: secondsLeft });
+    scoreArr.push({ myInitials: upperInit, myScore: timeRemaining });
 
     // sort scores by amount greatest to least
     scoreArr = scoreArr.sort((a, b) => {
